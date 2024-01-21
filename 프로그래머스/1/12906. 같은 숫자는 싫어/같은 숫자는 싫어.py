@@ -1,10 +1,8 @@
 def solution(arr):
-    t_dict = {i: item for i, item in enumerate(arr)}
+    answer = []
 
-    for i in range(1, len(arr)):
-        if arr[i - 1] == arr[i]:
-            del t_dict[i - 1]
-
-    answer = list(t_dict.values())
+    for i in arr:
+        if not answer or answer[-1] != i:
+            answer.append(i)
 
     return answer
