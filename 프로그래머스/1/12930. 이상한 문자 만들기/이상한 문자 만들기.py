@@ -1,7 +1,7 @@
 def solution(s):
     words = s.split(" ")
-    result = []
-
+    answer = []
+    
     for word in words:
         converted_word = ""
         for i in range(len(word)):
@@ -9,6 +9,6 @@ def solution(s):
                 converted_word += word[i].upper()
             else:
                 converted_word += word[i].lower()
-        result.append(converted_word)
+        answer.append(converted_word)
 
-    return " ".join(result)
+    return " ".join(answer)
