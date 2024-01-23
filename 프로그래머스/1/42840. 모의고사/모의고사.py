@@ -1,4 +1,5 @@
 def solution(answers):
+    # 각 수포자 패턴 선언
     pattern1 = [
         1,
         2,
@@ -19,7 +20,7 @@ def solution(answers):
         5,
         5,
     ]
-    cnt = [0, 0, 0]
+    cnt = [0, 0, 0]  # 각 수포자 정답 개수 카운트
     for i, item in enumerate(answers):
         if item == pattern1[i % len(pattern1)]:
             cnt[0] += 1
@@ -28,5 +29,6 @@ def solution(answers):
         if item == pattern3[i % len(pattern3)]:
             cnt[2] += 1
 
+    #  가장 높은 점수를 받은 사람 특정
     answer = [i + 1 for i, item in enumerate(cnt) if item == max(cnt)]
     return answer
