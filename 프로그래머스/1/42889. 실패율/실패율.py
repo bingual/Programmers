@@ -13,9 +13,9 @@ def solution(N, stages):
 
     # 분모 구하기
     temp = len(stages)
-    for i in range(N):
-        temp -= mol[i + 1]
-        den[i + 1] = temp
+    for i in range(1, N + 1):
+        temp -= mol[i]
+        den[i] = temp
 
     # 실패율 구하기
     failure = {}
