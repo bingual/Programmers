@@ -3,17 +3,15 @@ def solution(players, callings):
     player = {i: player for i, player in enumerate(players)}
 
     for call in callings:
-        next_rank = rank[call]  # 3
-        prev_name = player[next_rank - 1]  # poe
-        prev_rank = rank[prev_name]  # 2
-
-        # 순위 변경
-        rank[prev_name] = next_rank
-        rank[call] = prev_rank
+        temp = player[rank[call] - 1]  # poe
 
         # 선수 변경
-        player[prev_rank] = call
-        player[next_rank] = prev_name
+        player[rank[call]] = temp
+        player[rank[temp]] = call
+
+        # 순위 변경
+        rank[call] -= 1
+        rank[temp] += 1
 
     answer = list(player.values())
     return answer
