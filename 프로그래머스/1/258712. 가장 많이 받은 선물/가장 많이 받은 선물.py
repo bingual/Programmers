@@ -2,13 +2,12 @@ from collections import defaultdict
 
 
 def solution(friends, gifts):
+    answer = 0
     # 선물을 주고받은 기록
     history = {
-        friend: {"gift": defaultdict(int), "received": defaultdict(int)}
+        friend: {"gift": defaultdict(int), "received": defaultdict(int), "rank": 0}
         for friend in friends
     }
-    rank = {friend: 0 for friend in friends}
-
     set_friends = set(friends)
 
     # 선물 지수
@@ -39,7 +38,7 @@ def solution(friends, gifts):
         if pivot_difference:
             for name in pivot_difference:
                 if pivot_index > history_index(name):
-                    rank[friend] += 1
+                    history[friend]["rank"] += 1
 
         # 선물을 주고받은 기록이 있을때 처리
         for giver, give_cnt in history[friend]["gift"].items():
@@ -48,10 +47,11 @@ def solution(friends, gifts):
                 if give_cnt > received_cnt or (
                     give_cnt == received_cnt and pivot_index > history_index(giver)
                 ):
-                    rank[friend] += 1
+                    history[friend]["rank"] += 1
             else:
-                rank[friend] += 1
+                history[friend]["rank"] += 1
 
-    # 가장 많이 선물받은 값 반환
-    answer = max(rank.values())
+        # 가장 많이 선물받은 값 저장
+        answer = max(answer, history[friend]["rank"])
+
     return answer
