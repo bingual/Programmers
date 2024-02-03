@@ -10,13 +10,13 @@ def solution(n):
         if cnt == n:
             return current % 1234567
 
+        # 미리 계산된 값 처리
         if (prev, current, cnt) in memo:
             return memo[(prev, current)]
 
-        temp = recursion(current, prev + current, cnt + 1)
-        memo[(prev, current)] = temp
+        temp = recursion(current % 1234567, (prev + current) % 1234567, cnt + 1)
+        memo[(prev, current)] = temp  # 계산된 값을 저장
 
         return temp
 
-    answer = recursion(1, 1, 2)
-    return answer
+    return recursion(1, 1, 2)
