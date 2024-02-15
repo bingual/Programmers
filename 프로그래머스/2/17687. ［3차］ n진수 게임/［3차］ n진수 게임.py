@@ -4,19 +4,19 @@ def solution(n, t, m, p):
 
     i = 0
     while len(decimals) < t * m:
-        decimals.extend(convert(i, n))
+        decimals.append(convert(i, n))
         i += 1
+    decimals = "".join(decimals)
 
     for i in range(t):
         answer.append(decimals[p - 1 + i * m])
-    print(answer)
 
     return "".join(answer)
 
 
 def convert(n, b):
     if n == 0:
-        return ["0"]
+        return "0"
 
     decimals = []
     while n > 0:
@@ -24,4 +24,4 @@ def convert(n, b):
         decimals.append(str(r) if r < 10 else chr(65 + r - 10))
         n //= b
 
-    return decimals[::-1]
+    return "".join(decimals[::-1])
