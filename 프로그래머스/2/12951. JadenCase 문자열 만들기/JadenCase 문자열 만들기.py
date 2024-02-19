@@ -1,10 +1,13 @@
+# "3 p e   o ple"
+
 def solution(s):
+    answer = []
     s = s.split(" ")
-
-    for i, word in enumerate(s):
+    
+    for word in s:
         if word:
-            s[i] = word[0].upper() + word[1:].lower()
+            answer.append(word[0].upper() + word[1:].lower())
         else:
-            s[i] = word
+            answer.append(word)
 
-    return " ".join(s)
+    return " ".join(answer)
