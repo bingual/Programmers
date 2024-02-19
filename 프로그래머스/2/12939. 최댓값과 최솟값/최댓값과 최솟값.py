@@ -1,4 +1,3 @@
 def solution(s):
-    temp = list(map(int, s.split()))
-    answer = str(min(temp)) + " " + str(max(temp))
-    return answer
+    s = list(map(int, s.split()))
+    return f"{min(s)} {max(s)}"
