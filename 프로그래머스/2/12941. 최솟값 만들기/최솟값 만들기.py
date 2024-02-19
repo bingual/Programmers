@@ -1,7 +1,5 @@
-def solution(A, B):
+def solution(A,B):
     answer = 0
     A.sort()
     B.sort(reverse=True)
-    for a, b in zip(A, B):
-        answer += a * b
-    return answer
+    return sum(x * y for x, y in zip(A, B))
