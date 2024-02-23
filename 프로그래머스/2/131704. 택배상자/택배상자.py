@@ -1,28 +1,27 @@
-from collections import deque
+from collections import deque 
 
 
 def solution(order):
+    answer = 0
+    
     order = deque(order)
-    main_c = deque(sorted(order))
-    sub_c = deque()
-    t = []
-    
-    while main_c:
-        if sub_c and order[0] == sub_c[-1]:
-            sp = sub_c.pop()
-            t.append(sp)
+    sub = deque()
+    for i in range(len(order)):
+        main = i + 1
+        if main == order[0]:
             order.popleft()
-            
-        mpl = main_c.popleft()
-        if order[0] == mpl:
-            t.append(mpl)
-            order.popleft()
+            answer += 1
         else:
-            sub_c.append(mpl)
-    
-    while sub_c and sub_c[-1] == order[0]:
-        sp = sub_c.pop()
-        opl = order.popleft()     
-        t.append(sp)
+            sub.append(main)
             
-    return len(t)
+        if sub and sub[-1] == order[0]:
+            order.popleft()
+            sub.pop()
+            answer += 1
+            
+    while sub and sub[-1] == order[0]:
+        order.popleft()
+        sub.pop()
+        answer += 1
+        
+    return answer
