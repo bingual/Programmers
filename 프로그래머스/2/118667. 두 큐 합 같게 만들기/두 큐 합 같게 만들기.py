@@ -9,13 +9,13 @@ def solution(queue1, queue2):
 
     a_sum, b_sum = sum(a), sum(b)
     total = a_sum + b_sum
-    i_sum = total // 2
+    target = total // 2
 
     if total % 2 != 0:
         return -1
 
-    maxsize = max(len(a), len(b)) * 3
-    while a_sum != i_sum and b_sum != i_sum:
+    maxsize = len(a) * 3
+    while a_sum != target and b_sum != target:
         if maxsize <= answer:
             return -1
 
