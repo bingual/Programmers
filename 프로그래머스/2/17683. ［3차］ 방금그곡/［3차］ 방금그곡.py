@@ -1,27 +1,13 @@
 def solution(m, musicinfos):
     answer = []
     n = len(m)
-    m = (
-        m.replace("C#", "c")
-        .replace("D#", "d")
-        .replace("F#", "f")
-        .replace("G#", "g")
-        .replace("A#", "a")
-        .replace("B#", "b")
-    )
+    m = replace(m)
 
     for info in musicinfos:
         start, end, title, song = info.split(",")
         start, end = convert(start), convert(end)
 
-        song = (
-            song.replace("C#", "c")
-            .replace("D#", "d")
-            .replace("F#", "f")
-            .replace("G#", "g")
-            .replace("A#", "a")
-            .replace("B#", "b")
-        )
+        song = replace(song)
 
         full_song = (song * ((end - start) // len(song) + 1))[: end - start]
         if m in full_song:
@@ -36,3 +22,14 @@ def solution(m, musicinfos):
 def convert(time):
     h, m = time.split(":")
     return int(h) * 60 + int(m)
+
+
+def replace(s):
+    return (
+        s.replace("C#", "c")
+        .replace("D#", "d")
+        .replace("F#", "f")
+        .replace("G#", "g")
+        .replace("A#", "a")
+        .replace("B#", "b")
+    )
