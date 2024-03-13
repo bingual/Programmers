@@ -2,13 +2,8 @@ from math import gcd
 
 
 def solution(arrayA, arrayB):
-    arrayA, arrayB = list(set(arrayA)), list(set(arrayB))
-    gcd_a = get_gcd(arrayA)
-    gcd_b = get_gcd(arrayB)
-
-    result1 = divide(gcd_a, arrayB)
-    result2 = divide(gcd_b, arrayA)
-
+    gcd_a, gcd_b = get_gcd(arrayA), get_gcd(arrayB)
+    result1, result2 = divide(gcd_a, arrayB), divide(gcd_b, arrayA)
     if not result1 and not result2:
         return 0
     else:
