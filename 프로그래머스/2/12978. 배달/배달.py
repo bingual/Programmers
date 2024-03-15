@@ -1,33 +1,27 @@
+from collections import defaultdict
 import heapq
 
 
-def dijkstra(graph, start):
-    distances = {node: float("inf") for node in graph}
-    distances[start] = 0
-    heap = [(0, start)]
-
-    while heap:
-        current_distance, current_node = heapq.heappop(heap)
-
-        if current_distance > distances[current_node]:
-            continue
-
-        for neighbor, weight in graph[current_node]:
-            distance = current_distance + weight
-
-            if distance < distances[neighbor]:
-                distances[neighbor] = distance
-                heapq.heappush(heap, (distance, neighbor))
-
-    return distances
-
-
 def solution(N, road, K):
-    graph = {x: [] for x in range(1, N + 1)}
+    graph = defaultdict(list)
     for a, b, c in road:
         graph[a].append((b, c))
         graph[b].append((a, c))
+    return sum([1 for x in dijkstra(graph, 1).values() if x <= K])
 
-    distances = dijkstra(graph, 1)
-    count = sum(1 for dist in distances.values() if dist <= K)
-    return count
+
+def dijkstra(graph, start):
+    dists = defaultdict(lambda: float("inf"))
+    dists[start] = 0
+    heap = [(0, start)]
+    while heap:
+        dist, node = heapq.heappop(heap)
+        if dist > dists[node]:
+            continue
+
+        for n_node, n_dist in graph[node]:
+            u_dist = dist + n_dist
+            if u_dist < dists[n_node]:
+                dists[n_node] = u_dist
+                heapq.heappush(heap, (u_dist, n_node))
+    return dists
