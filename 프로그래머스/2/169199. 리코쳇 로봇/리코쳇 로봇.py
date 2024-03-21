@@ -2,7 +2,6 @@ from collections import deque
 
 
 def solution(board):
-    answer = 0
     n, m = len(board), len(board[0])
     board = [list(word) for word in board]
 
@@ -36,5 +35,4 @@ def solution(board):
     for i in range(n):
         for j in range(m):
             if board[i][j] == "R":
-                answer = bfs(i, j)
-    return answer
+                return bfs(i, j)
