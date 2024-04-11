@@ -1,23 +1,17 @@
-from collections import defaultdict
+import heapq
 
 
 def solution(book_time):
-    room = defaultdict(int)
-    for i, time in enumerate(sorted(book_time)):
-        start = convert(time[0])
-        end = convert(time[1])
-
-        assigned = False
-        for j, check_out in room.items():
-            if check_out <= start:
-                room[j] = end + 10
-                assigned = True
-                break
-
-        if not assigned:
-            room[i] = end + 10
-
-    return len(room)
+    heap = []
+    for start, end in sorted(book_time):
+        start, end = convert(start), convert(end)
+        clean = end + 10
+        if heap and start >= heap[0]:
+            p = heapq.heappop(heap)           
+            heapq.heappush(heap, (clean))
+        else:
+            heapq.heappush(heap, (clean))
+    return len(heap)
 
 
 def convert(time):
